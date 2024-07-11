@@ -4,14 +4,12 @@ Web application built for the purpose of tracking income and expenses.
 
 ## Project Tech Stack
 
-### mongoDB
-Database operations
-### express
-Backend
-### React
-Frontend
-### Node.js
-Backend hehe
+### Frontend
+React
+### express Backend
+express, Node.js
+### Database Operations
+MongoDB
 
 # Getting Started with Create React App
 
