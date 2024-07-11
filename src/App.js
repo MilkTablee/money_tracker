@@ -10,11 +10,11 @@ function App() {
     const url = process.env.REACT_APP_API_URL+'/transaction';
     fetch(url, {
       method: 'POST',
-      headers: {'Content-type':'application/json'},
-      body: JSON.stringify({name, description, datetime})
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name, description, datetime })
     }).then(response => {
-      response.json().then(() => {
-        
+      response.json().then(json => {
+        console.log('result', json);
       });
     });
   }
