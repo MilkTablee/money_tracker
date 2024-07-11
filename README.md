@@ -6,7 +6,7 @@ Web application built for the purpose of tracking income and expenses.
 
 ### Frontend
 React
-### express Backend
+### Backend
 express, Node.js
 ### Database Operations
 MongoDB
