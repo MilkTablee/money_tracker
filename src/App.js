@@ -42,6 +42,15 @@ function App() {
   }
 
   // TODO: IMPLEMENT A FUNCTION TO HANDLE DELETION OF TRANSACTION
+  async function deleteTransaction(id){
+    const url = '${process.env.REACT_APP_API_URL}/transaction/${id}';
+    await fetch(url, {
+      method: 'DELETE',
+      headers: {'Content-Type':'application/json'}
+    });
+    setTransactions(transactions.filter(transaction => transaction._id !== id));
+  }
+
   // TODO IMPLEMENT A FUNCTION TO HANDLE EDITING A TRANSACTION
 
   // BALANCE FORMATTING LOGIC
@@ -91,17 +100,20 @@ function App() {
           hour12: false
         });
         return (
-          <div className="transaction" key={transaction._id}>
-            <div className="left">
-              <div className="name">{transaction.name}</div>
-              <div className="description">{transaction.description}</div>
-            </div>
-            <div className="right">
-              <div className={"price " + (transaction.price < 0 ? "red" : "green")}>
-                {transaction.price}
+          <div className="transaction-container" key={transaction._id}>
+            <div className="transaction">
+              <div className="left">
+                <div className="name">{transaction.name}</div>
+                <div className="description">{transaction.description}</div>
               </div>
-              <div className="datetime">{formattedDateTime}</div>
+              <div className="middle">
+                <div className={"price " + (transaction.price < 0 ? "red" : "green")}>
+                  {transaction.price}
+                </div>
+                <div className="datetime">{formattedDateTime}</div>
+              </div>
             </div>
+            <button className="delete" onClick={() => deleteTransaction(transaction._id)}>Delete</button>
           </div>
         )
       })}
