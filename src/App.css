@@ -95,7 +95,7 @@ button.delete{
   padding: 5px 10px;
   cursor: pointer;
   position: absolute;
-  right: -70px;
+  right: -70px; /* This adjusts the position of the delete button. Bigger number means move left. */
 }
 button.delete:hover{
   background-color: #d32f2f;

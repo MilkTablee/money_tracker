@@ -41,14 +41,17 @@ function App() {
     });
   }
 
-  // TODO: IMPLEMENT A FUNCTION TO HANDLE DELETION OF TRANSACTION
   async function deleteTransaction(id){
-    const url = '${process.env.REACT_APP_API_URL}/transaction/${id}';
-    await fetch(url, {
+    const url = process.env.REACT_APP_API_URL+'/transaction/'+id;
+    const response = await fetch(url, {
       method: 'DELETE',
       headers: {'Content-Type':'application/json'}
     });
-    setTransactions(transactions.filter(transaction => transaction._id !== id));
+    if(response.ok){
+      setTransactions(transactions.filter(transaction => transaction._id !== id));
+    } else {
+      console.error('Failed to delete transaction: ', response.statusText);
+    }
   }
 
   // TODO IMPLEMENT A FUNCTION TO HANDLE EDITING A TRANSACTION

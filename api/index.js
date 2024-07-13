@@ -11,6 +11,7 @@ app.get('/api/test', (req, res) => {
   res.json('test ok');
 });
 
+// Create a new transaction
 app.post('/api/transaction', async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const { price, name, description, datetime } = req.body; // grab JSON information from request body
@@ -23,10 +24,30 @@ app.post('/api/transaction', async (req, res) => {
   res.json(transaction);
 });
 
+// Get all transactions
 app.get('/api/transactions', async (req, res) => {
   await mongoose.connect(process.env.MONGO_URL);
   const transactions = await Transaction.find();
   res.json(transactions);
 });
 
-app.listen(4000);
+// Delete a transaction by ID
+app.delete('/api/transaction/:id', async (req, res) => {
+  await mongoose.connect(process.env.MONGO_URL);
+  const {id} = req.params;
+
+  try {
+    const deletedTransaction = await Transaction.findByIdAndDelete(id);
+    if(!deletedTransaction){
+      return res.status(404).send('Transaction not found');
+    }
+    res.status(200).send('Transaction deleted successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
+app.listen(4000, () => {
+  console.log('Server is running on port 4000');
+});
