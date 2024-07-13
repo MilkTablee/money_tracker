@@ -49,6 +49,18 @@ form button{
   background-color: #ddd;
   cursor: pointer;
 }
+form button.disabled{
+  cursor: not-allowed;
+  background-color: #ddd;
+  color: #aaa;
+}
+form button:hover{
+  background-color: #bbb;
+}
+form button.disabled:hover{
+  background-color: #ddd;
+  color: #aaa;
+}
 div.transactions{
   margin-top: 10px;
   position: relative;

@@ -66,6 +66,9 @@ function App() {
   const fraction = balance.split('.')[1];
   balance = balance.split('.')[0];
 
+  // INPUT VALIDATION
+  const isFormValid = (name && datetime && description);
+
   return (
     // TODO: IMPLEMENT SEPARATE INPUT FIELD FOR PRICE
     // TODO: IMPLEMENT TOGGLE FOR INCOME/EXPENSE
@@ -87,7 +90,13 @@ function App() {
                  onChange={e => setDescription(e.target.value)}
                  placeholder={'description'}/>
         </div>
-        <button type="submit">Add new transaction</button>
+        <button type="submit"
+                disabled={!isFormValid}
+                className={!isFormValid ? 'disabled' : ''}
+                title={!isFormValid ? 'Above fields are required.' : ''}
+                >
+        Add new transaction
+        </button>
       </form>
       <div className="transactions">
       {transactions.length > 0 && transactions.map(transaction => {
@@ -111,7 +120,7 @@ function App() {
               </div>
               <div className="middle">
                 <div className={"price " + (transaction.price < 0 ? "red" : "green")}>
-                  {transaction.price}
+                  {transaction.price.toFixed(2)}
                 </div>
                 <div className="datetime">{formattedDateTime}</div>
               </div>
